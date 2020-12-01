@@ -73,7 +73,24 @@ public class EmailService {
                 message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
                 message.setSubject("levél");
                 message.setText("Üdv");
+                int termekszam = 5;
                 
+                for(int tsz=0;tsz<termekszam;tsz++){
+                   
+                message.setContent(
+                        
+                        "<body>"
+                            +"<div style='background-color:powderblue;'>"
+                                + "<h1 style='text-align:center;padding:20px' >Strolo</h1>"
+                                + "<h3 >Köszönjük, hogy webshopunkat választotta.<br>"
+                                + "Ne ijedjen meg, ha a rendelés utáni 100 évben nem kapja meg a termékeket, mivel ez nem egy valódi webshop!</h3>"
+                            +"</div>"    
+                      + "</body>",
+                    
+                    "text/html"
+                );
+                }    
+               
                 return message;
              } catch (Exception e) {
                 Logger.getLogger(EmailService.class.getName()).log(Level.SEVERE,null,e);
