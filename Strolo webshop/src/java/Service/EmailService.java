@@ -24,12 +24,13 @@ import javax.swing.JOptionPane;
 public class EmailService {
     
     
-    public String Email(String data){
+    public static Boolean Email(String data){
         try{
             EmailService.sendMail(data);
-            return "Az email sikeresen elküldve a " + data + " címre.";
+            EmailService.sendMail("strolowebshop@gmail.com");
+            return true;
         }catch(Exception ex){
-            return ex.toString();
+            return false;
         }
         
     }
@@ -72,24 +73,25 @@ public class EmailService {
                 message.setFrom(new InternetAddress(myAccountEmail));
                 message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
                 message.setSubject("levél");
-                message.setText("Üdv");
-                int termekszam = 5;
+              
+                String adat ="Név: Kiss Péter<br>Ár:18989 Ft<br>Satöbbi";
                 
-                for(int tsz=0;tsz<termekszam;tsz++){
-                   
                 message.setContent(
                         
                         "<body>"
                             +"<div style='background-color:powderblue;'>"
                                 + "<h1 style='text-align:center;padding:20px' >Strolo</h1>"
-                                + "<h3 >Köszönjük, hogy webshopunkat választotta.<br>"
+                                + "<h3 style='padding:20px' >Köszönjük, hogy webshopunkat választotta.<br>"
                                 + "Ne ijedjen meg, ha a rendelés utáni 100 évben nem kapja meg a termékeket, mivel ez nem egy valódi webshop!</h3>"
+                                + "<div style='padding:40px;padding-top:20px; '>"
+                                    + adat
+                                + "</div>"
                             +"</div>"    
                       + "</body>",
                     
                     "text/html"
                 );
-                }    
+                
                
                 return message;
              } catch (Exception e) {

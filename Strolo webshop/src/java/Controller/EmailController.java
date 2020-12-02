@@ -66,11 +66,13 @@ public class EmailController extends HttpServlet {
                         s++;
                     }
                     if(s == 0){
-                        uzenet = "Az e-mail sikeresen elküldve a " + email + " címre.";
-                        out.write(uzenet);
-                        eSrv.Email(email);
-                        
+                        if(EmailService.Email(email)){
+                            uzenet = "Az e-mail sikeresen elküldve a " + email + " címre.";
+                        }
+                       
                     }
+                    
+                    
                     out.write(uzenet);
                     
                 }
