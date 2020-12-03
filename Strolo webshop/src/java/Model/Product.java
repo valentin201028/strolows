@@ -6,11 +6,18 @@
 package Model;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +26,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -46,6 +54,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByGender", query = "SELECT p FROM Product p WHERE p.gender = :gender")
     , @NamedQuery(name = "Product.findByCSize", query = "SELECT p FROM Product p WHERE p.cSize = :cSize")
     , @NamedQuery(name = "Product.findByStock", query = "SELECT p FROM Product p WHERE p.stock = :stock")
+    , @NamedQuery(name = "Product.findByPhoto", query = "SELECT p FROM Product p WHERE p.photo = :photo")
     , @NamedQuery(name = "Product.findByIsActive", query = "SELECT p FROM Product p WHERE p.isActive = :isActive")})
 public class Product implements Serializable {
 
@@ -102,6 +111,11 @@ public class Product implements Serializable {
     private int stock;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 1000)
+    @Column(name = "photo")
+    private String photo;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "is_active")
     private int isActive;
     @ManyToMany(mappedBy = "productCollection")
@@ -109,8 +123,6 @@ public class Product implements Serializable {
     @JoinColumn(name = "categoryID", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productID")
-    private Collection<Photo> photoCollection;
 
     public Product() {
     }
@@ -119,7 +131,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Product(Integer id, String productName, float price, String description, int weight, String brand, String color, String madeIn, Character gender, int cSize, int stock, int isActive) {
+    public Product(Integer id, String productName, float price, String description, int weight, String brand, String color, String madeIn, Character gender, int cSize, int stock, String photo, int isActive) {
         this.id = id;
         this.productName = productName;
         this.price = price;
@@ -131,6 +143,7 @@ public class Product implements Serializable {
         this.gender = gender;
         this.cSize = cSize;
         this.stock = stock;
+        this.photo = photo;
         this.isActive = isActive;
     }
 
@@ -222,6 +235,14 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public int getIsActive() {
         return isActive;
     }
@@ -229,6 +250,19 @@ public class Product implements Serializable {
     public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
+    
+    
+    
+    public static List<Product> get_all_product(){
+        List<Product> products = new ArrayList<>();
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Strolo_webshopPU");
+        EntityManager manager = factory.createEntityManager();
+        StoredProcedureQuery spq = manager.createStoredProcedureQuery("get_all_product");
+        products = spq.getResultList();
+        return products;
+        
+    }
+    
 
     @XmlTransient
     public Collection<Order1> getOrder1Collection() {
@@ -245,15 +279,6 @@ public class Product implements Serializable {
 
     public void setCategoryID(Category categoryID) {
         this.categoryID = categoryID;
-    }
-
-    @XmlTransient
-    public Collection<Photo> getPhotoCollection() {
-        return photoCollection;
-    }
-
-    public void setPhotoCollection(Collection<Photo> photoCollection) {
-        this.photoCollection = photoCollection;
     }
 
     @Override

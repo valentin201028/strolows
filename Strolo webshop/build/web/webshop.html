@@ -6,9 +6,39 @@
         <title>Strolo - web shop</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/master.css">
-        <link rel="stylesheet" href="css/slave.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         
-        
+        <script>
+            
+            
+            /*window.onload = function Feltoltes(){
+                alert("feltoltes");
+            }*/
+            
+            window.onload = function allProduct(){
+               var task = "allproduct";
+               var type = document.getElementbyId("tipuskereses").value;
+               var sex = document.getElementById("nemkereses").value;
+                
+                var request = {"task": task,"type":type,"sex":sex};
+                $.ajax({
+                    url: "ProductContoller",
+                    type: "POST",
+                    data: request,
+                    success: function(rd){
+                        alert(rd);
+                        
+                    },
+                    error: function(){
+                        alert("hiba");
+                    }
+                }); 
+            }
+            
+            
+            
+        </script>
+            
 	</head>
 	<body class="container">
         <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">
@@ -28,30 +58,30 @@
                 </div>
             </nav>
         </header>
-        <main class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">
+            <main  class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">
             <article id="articleFilterSectionWS" class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">
                 <section>
                     <div class="container col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
                     <div id="filterBox" class="container col-lg-8 col-md-8 col-sm-8 col-xs-8">
                         <form action="">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
+                            <select onchange="allProduct()()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
                                 <option value="0">Típus</option>
                                 <option value="1">Ruhanemű</option>
                                 <option value="2">Játék</option>
                                 <option value="3">Ápolás</option>
                                 <option value="4">Táplálkozás</option>
                                 <option value="5">Hordozás</option>
-                                <option value="5">Otthon</option>
+                                <option value="6">Otthon</option>
                             </select>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" name="type">
+                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="nemkereses" onchange="allProduct()()">
                                 <option value="0">Nem</option>
                                 <option value="1">Fiú</option>
                                 <option value="2">Lány</option>
                             </select>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" type="search" name="search" placeholder="Keresés">
+                            <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" type="search" id="kereses" onchange="Kereses()" placeholder="Keresés">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         </form>
                     </div>
