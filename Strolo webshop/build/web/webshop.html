@@ -15,6 +15,7 @@
                 alert("feltoltes");
             }*/
             
+           
             window.onload = function allProduct(){
                var task = "allproduct";
                var type = document.getElementbyId("tipuskereses").value;
@@ -22,11 +23,11 @@
                 
                 var request = {"task": task,"type":type,"sex":sex};
                 $.ajax({
-                    url: "ProductContoller",
+                    url: "ProductController",
                     type: "POST",
                     data: request,
                     success: function(rd){
-                        alert(rd);
+                        document.getElementById("myParagraph").innerHTML = "This is <em>your</em> paragraph!";
                         
                     },
                     error: function(){
@@ -65,8 +66,8 @@
                     <div id="filterBox" class="container col-lg-8 col-md-8 col-sm-8 col-xs-8">
                         <form action="">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select onchange="allProduct()()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
-                                <option value="0">Típus</option>
+                            <select onchange="allProduct()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
+                                <option value="0">Tipus</option>
                                 <option value="1">Ruhanemű</option>
                                 <option value="2">Játék</option>
                                 <option value="3">Ápolás</option>
@@ -75,7 +76,7 @@
                                 <option value="6">Otthon</option>
                             </select>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="nemkereses" onchange="allProduct()()">
+                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="nemkereses" onchange="allProduct()">
                                 <option value="0">Nem</option>
                                 <option value="1">Fiú</option>
                                 <option value="2">Lány</option>
@@ -100,7 +101,7 @@
                             <p class="price">1900 Ft</p>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Játékautó?</div>
+                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2"><p id="myParagraph">This is <em>my</em> paragraph.</p></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Baba?</div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -134,6 +135,7 @@
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Farmer?</div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <button onclick="allProduct()">GOMB</button>
                     </div>
                     
                 </section>

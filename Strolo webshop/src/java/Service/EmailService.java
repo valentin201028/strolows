@@ -5,6 +5,7 @@
  */
 package Service;
 
+import Model.Order;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,8 +21,20 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import Service.ProductService;
 
 public class EmailService {
+    
+    public static void DatasToTheEmail(String email,String nev1,String nev2,String varos,String cim,String telefon){
+        Order.setuEmail(email);
+        Order.setuFirstName(nev1);
+        Order.setuLastName(nev2);
+        Order.setuCity(varos);
+        Order.setuAddress(cim);
+        Order.setuPhone(telefon);
+        
+        
+    }
     
     
     public static Boolean Email(String data){
@@ -73,8 +86,13 @@ public class EmailService {
                 message.setFrom(new InternetAddress(myAccountEmail));
                 message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
                 message.setSubject("levél");
-              
-                String adat ="Név: Kiss Péter<br>Ár:18989 Ft<br>Satöbbi";
+                
+                
+                String adat = "nem jó valami";
+                ProductService PSrv = new ProductService();
+                adat = PSrv.kapcsolat("1","2");
+                
+                
                 
                 message.setContent(
                         
@@ -84,8 +102,17 @@ public class EmailService {
                                 + "<h3 style='padding:20px' >Köszönjük, hogy webshopunkat választotta.<br>"
                                 + "Ne ijedjen meg, ha a rendelés utáni 100 évben nem kapja meg a termékeket, mivel ez nem egy valódi webshop!</h3>"
                                 + "<div style='padding:40px;padding-top:20px; '>"
+                                    + "E-mail-cím: "+ Order.getuEmail() + "<br>"
+                                    + "Vezetéknév: "+ Order.getuFirstName() + "<br>"
+                                    + "Kersztnév: "+ Order.getuLastName() + "<br>"
+                                    + "Város: "+ Order.getuCity() + "<br>"
+                                    + "Cím: "+ Order.getuAddress() + "<br>"
+                                    + "Telefonszám: "+ Order.getuPhone() + "<br>"
+                                   
                                     + adat
                                 + "</div>"
+                                + "<h3 style='padding:20px' >További kérdései esetén kérjük, vegye del velünk a kapcsolatot telefonon, vagy e-mail-ben, melyeket megtalál az Információ menüpontban!<br>"
+                                        
                             +"</div>"    
                       + "</body>",
                     

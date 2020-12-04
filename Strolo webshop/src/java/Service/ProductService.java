@@ -1,7 +1,7 @@
 
 package Service;
 
-import Model.Product;
+import Model.Order;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProductService {
     
-    public static String kapcsolat(String type,String sex){
+    public String kapcsolat(String type,String sex){
         
         
         Connection conn = null;
@@ -51,7 +51,7 @@ public class ProductService {
 
                
                while(rs.next()){
-                    if((gender).contains(rs.getString("gender"))){
+                    if(rs.getString("gender").equals(gender)){
                         String name = rs.getString("productName");
                         names += name + "  ";
                         String gen = rs.getString("gender");

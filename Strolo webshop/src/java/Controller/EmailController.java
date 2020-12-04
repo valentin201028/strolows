@@ -51,6 +51,8 @@ public class EmailController extends HttpServlet {
                     boolean ok = Boolean.parseBoolean(ok0);
                     
                     
+                    
+                    
                     String uzenet = "hiba";
                     Integer s = 0;
                     if(email.length() == 0 || nev1.length() == 0 || nev2.length() == 0 || varos.length() == 0 || cim.length() == 0 || telefon.length() == 0 ){
@@ -66,6 +68,8 @@ public class EmailController extends HttpServlet {
                         s++;
                     }
                     if(s == 0){
+                        EmailService.DatasToTheEmail(email,nev1,nev2,varos,cim,telefon);
+                        
                         if(EmailService.Email(email)){
                             uzenet = "Az e-mail sikeresen elküldve a " + email + " címre.";
                         }
@@ -74,7 +78,7 @@ public class EmailController extends HttpServlet {
                     
                     
                     out.write(uzenet);
-                    
+                    out.close();
                 }
             }
         }catch(Exception ex){

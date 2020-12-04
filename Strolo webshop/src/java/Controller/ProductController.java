@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.Product;
+import Model.Order;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Valentin
  */
-@WebServlet(name = "ProductContoller", urlPatterns = {"/ProductContoller"})
-public class ProductContoller extends HttpServlet {
+@WebServlet(name = "ProductContoller", urlPatterns = {"/ProductController"})
+public class ProductController extends HttpServlet {
 ProductService PSrv = new ProductService();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,14 +42,14 @@ ProductService PSrv = new ProductService();
                 if(request.getParameter("task").equals("allproduct")){
                     String type = request.getParameter("type");
                     String sex = request.getParameter("sex");
-                    List<Product> allproduct = new ArrayList<>();
-                    
+                    List<Order> allproduct = new ArrayList<>();
                     //allproduct = PSrv.get_all_product();
                     String back = PSrv.kapcsolat(type,sex);
                     
                     String products = allproduct.toString();
                     
                     out.write(back);
+                    out.close();
                 }
             }
             
