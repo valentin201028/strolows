@@ -111,7 +111,7 @@ public class EmailService {
                                    
                                     + adat
                                 + "</div>"
-                                + "<h3 style='padding:20px' >További kérdései esetén kérjük, vegye del velünk a kapcsolatot telefonon, vagy e-mail-ben, melyeket megtalál az Információ menüpontban!<br>"
+                                + "<h3 style='padding:20px' >További kérdései esetén kérjük, vegye fel velünk a kapcsolatot telefonon, vagy e-mail-ben, melyeket megtalál az Információ menüpontban!<br>"
                                         
                             +"</div>"    
                       + "</body>",

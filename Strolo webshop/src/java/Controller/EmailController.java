@@ -71,14 +71,15 @@ public class EmailController extends HttpServlet {
                         EmailService.DatasToTheEmail(email,nev1,nev2,varos,cim,telefon);
                         
                         if(EmailService.Email(email)){
-                            uzenet = "Az e-mail sikeresen elküldve a " + email + " címre.";
+                            uzenet = "Az e-mail sikeresen elküldve.";
                         }
                        
                     }
                     
-                    
                     out.write(uzenet);
-                    out.close();
+                    out.checkError();
+                    out.flush();
+                    
                 }
             }
         }catch(Exception ex){

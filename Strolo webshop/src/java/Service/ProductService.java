@@ -11,7 +11,10 @@ import java.util.List;
 
 
 public class ProductService {
-    
+    public static String kiír(){
+        return "kiírva";
+    }
+     
     public String kapcsolat(String type,String sex){
         
         
@@ -22,7 +25,7 @@ public class ProductService {
             String gender = "ULF";
             if(null != sex)switch (sex) {
             case "0":{
-                gender = "ULF";
+                gender = "U";
                 break;
             }
             case "1":{
@@ -51,7 +54,15 @@ public class ProductService {
 
                
                while(rs.next()){
-                    if(rs.getString("gender").equals(gender)){
+                   
+                    if( !"U".equals(gender) || rs.getString("gender").equals(gender)){
+                        String name = rs.getString("productName");
+                        names += name + "  ";
+                        String gen = rs.getString("gender");
+                        names += gen;
+                    }
+                    
+                    else if("U".equals(gender)){
                         String name = rs.getString("productName");
                         names += name + "  ";
                         String gen = rs.getString("gender");

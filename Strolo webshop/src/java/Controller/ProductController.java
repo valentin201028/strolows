@@ -5,12 +5,8 @@
  */
 package Controller;
 
-import Model.Order;
-import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Valentin
  */
-@WebServlet(name = "ProductContoller", urlPatterns = {"/ProductController"})
+@WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
 public class ProductController extends HttpServlet {
-ProductService PSrv = new ProductService();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,23 +36,18 @@ ProductService PSrv = new ProductService();
             PrintWriter out = response.getWriter();
             if(request.getParameter("task")!=null){
                 if(request.getParameter("task").equals("allproduct")){
-                    String type = request.getParameter("type");
-                    String sex = request.getParameter("sex");
-                    List<Order> allproduct = new ArrayList<>();
-                    //allproduct = PSrv.get_all_product();
-                    String back = PSrv.kapcsolat(type,sex);
-                    
-                    String products = allproduct.toString();
-                    
-                    out.write(back);
+                    out.write("siker");
                     out.close();
+                    
+                    
                 }
+                
             }
-            
-            
-        }catch(Exception ex){
-            ex.toString();
+           
+        }catch(IOException e){
+            e.toString();
         }
+                
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -6,28 +6,20 @@
         <title>Strolo - web shop</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/master.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             
-            
-            /*window.onload = function Feltoltes(){
-                alert("feltoltes");
-            }*/
-            
-           
-            window.onload = function allProduct(){
-               var task = "allproduct";
-               var type = document.getElementbyId("tipuskereses").value;
-               var sex = document.getElementById("nemkereses").value;
-                
-                var request = {"task": task,"type":type,"sex":sex};
+            window.onload = function Product(){
+                var task = "allproduct";
+                var type = document.getElementbyId("tipuskereses").value;
+                var sex = document.getElementById("nemkereses").value;
+                var request = {"task":task,"type":type,"sex":sex};s
                 $.ajax({
                     url: "ProductController",
                     type: "POST",
                     data: request,
                     success: function(rd){
-                        document.getElementById("myParagraph").innerHTML = "This is <em>your</em> paragraph!";
+                        alert("rd");
                         
                     },
                     error: function(){
@@ -135,7 +127,6 @@
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Farmer?</div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <button onclick="allProduct()">GOMB</button>
                     </div>
                     
                 </section>
