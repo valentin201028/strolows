@@ -2,6 +2,7 @@
 package Service;
 
 import Model.Order;
+import Model.Product;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,17 +10,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//ITT VANNAK AZOK A FÜGGVÉNYEK, MELYEK FELTÖLTIK A 'WEBSHOP' ÉS A 'PRODUCT' LAYOUTOT
 public class ProductService {
-    public static String kiír(){
-        return "kiírva";
-    }
-     
-    public String kapcsolat(String type,String sex){
+    
+    //EZ A FÜGGVÉNY KÉRI LE, ÉS ADJA VISSZA ANNAK A TERMÉKNEK AZ ADATAIT, MELYNEK ID-JÁT MEGADTUK NEKI (STRING ->PRODUCT)
+    public String ProductFill(){
+        String datas = "a";
+        //ide jön a lekérdezés id megadásával lehívja a termék adatait.
+        return datas;
         
+    }
+    
+    
+    //EZ A FÜGGVÉNY OLVASSA KI, HOGY A 'WEBSHOP' LAYOUTON MELY TÍPUS ÉS NEM VAN BEÁLLÍTVA
+    //EZ ALAPJÁN KIOLVASSA EZEKET AZ ÉRTÉKEKET AZ ADATBÁZISBÓL, MAJD VISSZAADJA A CONTROLLERNEK
+    public List<String> webshopFill(String type,String sex){
         
         Connection conn = null;
-        String names = "Terméknevek: ";
+        String names = "Terméknevek: \n ";
+        List<String> productList = new ArrayList<>();
         
         try{
             String gender = "ULF";
@@ -55,28 +64,33 @@ public class ProductService {
                
                while(rs.next()){
                    
-                    if( !"U".equals(gender) || rs.getString("gender").equals(gender)){
-                        String name = rs.getString("productName");
-                        names += name + "  ";
-                        String gen = rs.getString("gender");
-                        names += gen;
+                    if( !"U".equals(gender) && rs.getString("gender").equals(gender)){
+                        
+                        productList.add(rs.getString("id"));
+                        productList.add(rs.getString("productName"));
+                        productList.add(rs.getString("price"));
+                        productList.add(rs.getString("photo"));
+                        
+                        
                     }
                     
                     else if("U".equals(gender)){
-                        String name = rs.getString("productName");
-                        names += name + "  ";
-                        String gen = rs.getString("gender");
-                        names += gen;
+                        
+                        productList.add(rs.getString("id"));
+                        productList.add(rs.getString("productName"));
+                        productList.add(rs.getString("price"));
+                        productList.add(rs.getString("photo"));
                     }
                     
                    }
                
                conn.close();
+               
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return names;
+        return productList;
     }
     
     

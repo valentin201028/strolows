@@ -25,6 +25,7 @@ import Service.ProductService;
 
 public class EmailService {
     
+    //EZ A FÜGGVÉNY ÍRJA BE A MEGADOTT ADATOKAT A MODELBE.
     public static void DatasToTheEmail(String email,String nev1,String nev2,String varos,String cim,String telefon){
         Order.setuEmail(email);
         Order.setuFirstName(nev1);
@@ -36,7 +37,7 @@ public class EmailService {
         
     }
     
-    
+    //EZ AZ E-MAIL-KÜDŐ FÜGGVÉNY ELSŐ RÉSZE
     public static Boolean Email(String data){
         try{
             EmailService.sendMail(data);
@@ -48,6 +49,7 @@ public class EmailService {
         
     }
 
+    //EZ AZ E-MAIL-KÜDŐ FÜGGVÉNY MÁSODIK ÉS NEGYEDIK RÉSZE: BEJELENTKEZÉS,E-MAILKÜLDÉS
     public static void sendMail(String recepient) throws Exception{
         System.out.println("felkészülés");
         Properties properties = new Properties();
@@ -79,6 +81,9 @@ public class EmailService {
         
     }
         
+        //EZ AZ E-MAIL-KÜDŐ FÜGGVÉNY HARMADIK RÉSZE:
+        //ITT VAN A SZÖVEG
+        //ITT HÍVÓDIK MEG AZ A FÜGGVÉNY, AMI MEGADJA, HOGY MELY TERMÉKEKET RENDELTE MEG A VÁSAÁRLÓ
         private static Message prepareMessage(Session session, String myAccountEmail, String recipient){
             try {
                 
@@ -90,7 +95,7 @@ public class EmailService {
                 
                 String adat = "nem jó valami";
                 ProductService PSrv = new ProductService();
-                adat = PSrv.kapcsolat("1","2");
+                adat = "ez lesz az a lista, mely tartalmazza a termékneveket és árukat";
                 
                 
                 
