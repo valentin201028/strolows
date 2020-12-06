@@ -1,6 +1,8 @@
 
 package Model;
 
+import java.util.List;
+
 
 public abstract class Order {
     
@@ -12,11 +14,12 @@ public abstract class Order {
     private static String uCity;
     private static String uAddress;
     private static String uPhone;
-    private static int orderAmount;
-    private static int isActive;
+    private static Integer orderAmount;
+    private static Integer isActive;
+    private static List<Integer> productList;        
     
     
-    public Order(Integer id, String uFirstName, String uLastName, String uEmail, String uZipCode, String uCity, String uAddress, String uPhone, int orderAmount, int isActive) {
+    public Order(Integer id, String uFirstName, String uLastName, String uEmail, String uZipCode, String uCity, String uAddress, String uPhone, Integer orderAmount, Integer isActive, List<Integer> productList) {
         Order.id = id;
         Order.uFirstName = uFirstName;
         Order.uLastName = uLastName;
@@ -27,6 +30,7 @@ public abstract class Order {
         Order.uPhone = uPhone;
         Order.orderAmount = orderAmount;
         Order.isActive = isActive;
+        Order.productList = productList;
     }
 
     public static Integer getId() {
