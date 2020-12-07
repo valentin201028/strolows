@@ -113,6 +113,14 @@ public abstract class Order {
         Order.isActive = isActive;
     }
 
+    public static List<Integer> getProductList() {
+        return productList;
+    }
+
+    public static void setProductList(List<Integer> productList) {
+        Order.productList = productList;
+    }
+
     
     
 }
