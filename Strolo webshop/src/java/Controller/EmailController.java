@@ -68,7 +68,7 @@ public class EmailController extends HttpServlet {
                         s++;
                     }
                     if(s == 0){
-                        EmailService.DatasToTheEmail(email,nev1,nev2,varos,cim,telefon);
+                        EmailService.DatasToModel(email,nev1,nev2,varos,cim,telefon);
                         
                         if(EmailService.Email(email)){
                             uzenet = "Az e-mail sikeresen elküldve.";

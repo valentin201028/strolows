@@ -12,13 +12,13 @@ public abstract class Product {
     private static String brand;
     private static String color;
     private static String madeIn;
-    private static Character gender;
+    private static String gender;
     private static Integer cSize;
     private static Integer stock;
     private static String photo;
     private static Integer is_active;
 
-    public Product(Integer id, Integer categoryID, String productName, Integer price, String decription,Integer weight, String brand,String color,String madeIn, Character gender,Integer cSize,Integer stock,String photo,Integer is_active) {
+    public Product(Integer id, Integer categoryID, String productName, Integer price, String decription,Integer weight, String brand,String color,String madeIn, String gender,Integer cSize,Integer stock,String photo,Integer is_active) {
         Product.id = id;
         Product.categoryID = categoryID;
         Product.productName = productName;
@@ -107,11 +107,11 @@ public abstract class Product {
         Product.madeIn = madeIn;
     }
 
-    public static Character getGender() {
+    public static String getGender() {
         return gender;
     }
 
-    public static void setGender(Character gender) {
+    public static void setGender(String gender) {
         Product.gender = gender;
     }
 

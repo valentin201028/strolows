@@ -26,7 +26,7 @@ import Service.ProductService;
 public class EmailService {
     
     //EZ A FÜGGVÉNY ÍRJA BE A MEGADOTT ADATOKAT A MODELBE.
-    public static void DatasToTheEmail(String email,String nev1,String nev2,String varos,String cim,String telefon){
+    public static void DatasToModel(String email,String nev1,String nev2,String varos,String cim,String telefon){
         Order.setuEmail(email);
         Order.setuFirstName(nev1);
         Order.setuLastName(nev2);

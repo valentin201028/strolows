@@ -3,6 +3,7 @@ package Service;
 
 import Model.Order;
 import Model.Product;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,12 +15,47 @@ import java.util.List;
 public class ProductService {
     
     //EZ A FÜGGVÉNY KÉRI LE, ÉS ADJA VISSZA ANNAK A TERMÉKNEK AZ ADATAIT, MELYNEK ID-JÁT MEGADTUK NEKI (STRING ->PRODUCT)
-    public String ProductFill(){
-        String datas = "a";
-        //ide jön a lekérdezés id megadásával lehívja a termék adatait.
-        return datas;
+    public void ProductFill(Integer id){
+        Connection conn = null;
+        
+        try{
+            
+            Statement stmt;
+            ResultSet rs;
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/strolo?useSSL=false&allowPublicKeyRetrieval=true","admin","admin");
+            
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            rs = stmt.executeQuery("SELECT * from product WHERE product.id=" + id + ";");
+
+            Integer CateroryID = rs.getInt("categoryID");
+            String productName = rs.getString("productName");
+            Integer price = rs.getInt("price");
+            String description = rs.getString("description");
+            Integer weight = rs.getInt("weight");
+            String brand = rs.getString("productName");
+            String color = rs.getString("color");
+            String madeIn = rs.getString("madeIn");
+            String gender = rs.getString("gender");
+            Integer cSize = rs.getInt("cSize");
+            Integer stock = rs.getInt("stock");
+            String photo = rs.getString("photo");
+            Integer isActive = rs.getInt("isActive");
+            
+            
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
         
     }
+        
+   
+
+    
     
     
     //EZ A FÜGGVÉNY OLVASSA KI, HOGY A 'WEBSHOP' LAYOUTON MELY TÍPUS ÉS NEM VAN BEÁLLÍTVA
