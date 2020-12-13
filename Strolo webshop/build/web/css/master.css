@@ -147,6 +147,7 @@ body{
 }
 .articlesShop img{
     max-height: 100px;
+    max-width: 130px;
     width: auto;
     border: 1px solid black;
 }
@@ -158,6 +159,7 @@ body{
     background: black;
     border-radius: 4px;
 }
+
 .articlesShop .price{
     margin: 6px;
     margin-left: 30px;

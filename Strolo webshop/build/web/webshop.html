@@ -9,23 +9,79 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             
-            window.onload = function Product(){
+            window.onload = function call(){
+                onload: Product();
+            };
+            
+            function Product(){
                 var task = "allproduct";
-                var type = document.getElementbyId("tipuskereses").value;
+                var type = document.getElementById("tipuskereses").value;
                 var sex = document.getElementById("nemkereses").value;
-                var request = {"task":task,"type":type,"sex":sex};s
+                var request = {"task":task,"type":type,"sex":sex};
                 $.ajax({
                     url: "ProductController",
                     type: "POST",
                     data: request,
                     success: function(rd){
-                        alert("rd");
+                        //alert(rd);
+                        var getAll = rd;
+                        var toArray = getAll.split("|");
+                        var d = 0;
+                        var n = 1;
+                        var c = 2;
+                        var t = 3;
                         
+                        for(var j = 0; j<60; j++){
+                            var element = document.getElementById("product" + j);
+                            element.classList.remove("articlesShop");
+                            while (element.firstChild) {
+                                element.removeChild(element.lastChild);
+                            }
+                       }
+                        
+                        for(var i = 0; i<toArray.length/4-1; i++){
+                            
+                            
+                            var prodID = toArray[i];
+                            var prodName = toArray[n];
+                            var price = toArray[c];
+                            var picture = toArray[t];
+                            
+                            
+                            
+                            var element = document.getElementById("product"+i).className = "articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2";
+                            var img = document.createElement('img'); 
+                            img.src = picture;
+                            document.getElementById("product"+i).appendChild(img);
+                            var name = document.createElement('a');
+                            name.onclick = reply_click(this.id);
+                            name.innerHTML = prodName;
+                            name.href = "product.html";
+                            name.classList.add("name");
+                            name.style.color = "white";
+                            name.id = prodID;
+                            document.getElementById("product"+i).appendChild(name);
+                            var prc = document.createElement('P');
+                            prc.innerHTML = price +" Ft";
+                            prc.classList.add("price");
+                            document.getElementById("product"+i).appendChild(prc);
+                            
+                            d = d + 4;
+                            n = n + 4;
+                            c = c + 4;
+                            t = t + 4;
+                            
+                        }
                     },
                     error: function(){
                         alert("hiba");
                     }
                 }); 
+            };
+            
+            function reply_click(clicked_id)
+            {
+                alert(clicked_id);
             }
             
             
@@ -58,7 +114,7 @@
                     <div id="filterBox" class="container col-lg-8 col-md-8 col-sm-8 col-xs-8">
                         <form action="">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select onchange="allProduct()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
+                            <select onchange="Product()" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="tipuskereses">
                                 <option value="0">Tipus</option>
                                 <option value="1">Ruhanemű</option>
                                 <option value="2">Játék</option>
@@ -68,7 +124,7 @@
                                 <option value="6">Otthon</option>
                             </select>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="nemkereses" onchange="allProduct()">
+                            <select class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="nemkereses" onchange="Product()">
                                 <option value="0">Nem</option>
                                 <option value="1">Fiú</option>
                                 <option value="2">Lány</option>
@@ -84,50 +140,208 @@
             </article>
             <article id="articleWS" class="container col-lg-16 col-md-12 col-sm-12 col-xs-12 npdng">
                 <section>
+                    
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <img src="img/probacumisuveg.jpg">
-                            <a href="product.html" ><p style="color: white" class="name">példacumisüveg</p></a>
-                            <p class="price">1900 Ft</p>
-                        </div>
+                        <div id="product0"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2"><p id="myParagraph">This is <em>my</em> paragraph.</p></div>
+                        <div id="product1"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Baba?</div>
+                        <div id="product2"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Lego?</div>
+                        <div id="product3"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Kirakós?</div>
+                        <div id="product4"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Farmer?</div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Pelenka?</div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Játékautó?</div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Baba?</div>
+                        <div id="product5"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Lego?</div>
+                        <div id="product6"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Kirakós?</div>
+                        <div id="product7"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                        <div class="articlesShop col-lg-2 col-md-2 col-sm-2 col-xs-2">Farmer?</div>
+                        <div id="product8"></div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product9"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product10"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product11"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product12"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product13"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product14"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product15"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product16"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product17"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product18"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product19"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product20"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product21"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product22"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product23"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product24"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product25"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product26"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product27"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product28"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product29"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product30"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product31"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product32"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product33"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product34"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product35"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product36"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product37"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product38"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product39"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product40"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product41"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product42"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product43"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product44"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product45"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product46"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product47"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product48"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product49"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product50"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product51"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product52"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product53"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product54"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product55"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product56"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product57"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product58"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                        <div id="product59"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                     
                     
                 </section>
             </article>

@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
 public class ProductController extends HttpServlet {
+    ProductService Psrv = new ProductService();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,9 +40,19 @@ public class ProductController extends HttpServlet {
             PrintWriter out = response.getWriter();
             if(request.getParameter("task")!=null){
                 if(request.getParameter("task").equals("allproduct")){
-                    out.write("siker");
-                    out.close();
+                    String type = request.getParameter("type");
+                    String sex = request.getParameter("sex");
                     
+                    List<String> lista = new ArrayList<>();
+                    lista = Psrv.webshopFill(type,sex);
+                    String lista1 = "";
+
+                    for(int i = 0; i < lista.size(); i++ ){
+                        lista1 += lista.get(i) + "|";
+                    }
+                    
+                    out.write(lista1);
+                    out.close();
                     
                 }
                 

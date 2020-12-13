@@ -67,6 +67,7 @@ public class ProductService {
         List<String> productList = new ArrayList<>();
         
         try{
+            
             String gender = "ULF";
             if(null != sex)switch (sex) {
             case "0":{
@@ -95,18 +96,20 @@ public class ProductService {
                 
                 stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-               rs = stmt.executeQuery("SELECT productName,gender from Product");
+               rs = stmt.executeQuery("SELECT id,categoryID,productName,price,photo,gender from Product " );
 
                
                while(rs.next()){
                    
+                if("0".equals(type)){
                     if( !"U".equals(gender) && rs.getString("gender").equals(gender)){
                         
                         productList.add(rs.getString("id"));
                         productList.add(rs.getString("productName"));
                         productList.add(rs.getString("price"));
                         productList.add(rs.getString("photo"));
-                        
+                        /*productList.add(rs.getString("gender"));
+                        productList.add(rs.getString("categoryID"));*/
                         
                     }
                     
@@ -116,8 +119,34 @@ public class ProductService {
                         productList.add(rs.getString("productName"));
                         productList.add(rs.getString("price"));
                         productList.add(rs.getString("photo"));
+                        /*productList.add(rs.getString("gender"));
+                        productList.add(rs.getString("categoryID"));*/
+                    }
+                }  
+                
+                else{
+                        if( !"U".equals(gender) && rs.getString("gender").equals(gender) && rs.getString("categoryID").equals(type)){
+                        
+                        productList.add(rs.getString("id"));
+                        productList.add(rs.getString("productName"));
+                        productList.add(rs.getString("price"));
+                        productList.add(rs.getString("photo"));
+                        /*productList.add(rs.getString("gender"));
+                        productList.add(rs.getString("categoryID"));*/
+                        
                     }
                     
+                    else if("U".equals(gender) && rs.getString("categoryID").equals(type)){
+                        
+                        productList.add(rs.getString("id"));
+                        productList.add(rs.getString("productName"));
+                        productList.add(rs.getString("price"));
+                        productList.add(rs.getString("photo"));
+                        /*productList.add(rs.getString("gender"));
+                        productList.add(rs.getString("categoryID"));*/
+                    }
+                }
+                   
                    }
                
                conn.close();
