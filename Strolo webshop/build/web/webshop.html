@@ -42,7 +42,7 @@
                         for(var i = 0; i<toArray.length/4-1; i++){
                             
                             
-                            var prodID = toArray[i];
+                            var prodID = toArray[d];
                             var prodName = toArray[n];
                             var price = toArray[c];
                             var picture = toArray[t];
@@ -53,13 +53,15 @@
                             var img = document.createElement('img'); 
                             img.src = picture;
                             document.getElementById("product"+i).appendChild(img);
-                            var name = document.createElement('a');
-                            name.onclick = reply_click(this.id);
+                            var name = document.createElement('BUTTON');
                             name.innerHTML = prodName;
-                            name.href = "product.html";
+                            
+                            name.onclick = "window.location.href='product.html'";
                             name.classList.add("name");
                             name.style.color = "white";
-                            name.id = prodID;
+                            name.id = prodID; 
+                            name.onclick = reply_click(name.id);
+                            //name.addEventListener("click",reply_click(this.id));
                             document.getElementById("product"+i).appendChild(name);
                             var prc = document.createElement('P');
                             prc.innerHTML = price +" Ft";
@@ -72,6 +74,10 @@
                             t = t + 4;
                             
                         }
+                        
+                        reply_click(5);
+                        
+                        
                     },
                     error: function(){
                         alert("hiba");
@@ -79,10 +85,24 @@
                 }); 
             };
             
-            function reply_click(clicked_id)
+            
+            
+            
+            function reply_click(clicked)
             {
-                alert(clicked_id);
-            }
+                var choose = 0;
+                if (typeof clicked !== 'undefined') {
+                     choose = clicked;
+                }
+                
+                
+                console.log(choose);
+                localStorage.setItem("choose", choose);
+                
+                
+            }; 
+                   
+            
             
             
             

@@ -8,7 +8,24 @@
         <link rel="stylesheet" href="css/master.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         
-        
+        <script>
+            
+            window.onload = function call(){
+                getProduct();
+            };
+            
+            var number = 100;
+            number = localStorage.getItem("choose");
+            
+            
+            function getProduct(){
+                document.getElementById("productName").innerHTML = number;
+            }
+            
+            
+            
+            
+        </script>
             
 	</head>
 	<body class="container">
@@ -40,7 +57,7 @@
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                             <div class="productContainer articlesShop col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                <h1>Példacumisüveg</h1>
+                                <h1 id="productName">Példacumisüveg</h1>
                                 <div>    
                                     <p>Ár</p>
                                     <p>Leírás</p>
