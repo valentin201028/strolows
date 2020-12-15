@@ -14,12 +14,56 @@
                 getProduct();
             };
             
-            var number = 100;
-            number = localStorage.getItem("choose");
-            
             
             function getProduct(){
-                document.getElementById("productName").innerHTML = number;
+                var task = "cProduct";
+                var number = localStorage.getItem("chosen");
+                
+                var request = {"task":task,"number":number};
+                $.ajax({
+                    url: "ProductController",
+                    type: "POST",
+                    data: request,
+                    success: function(rd){
+                        var getAll = rd;
+                        var toArray = getAll.split("|");
+                        
+                        document.getElementById("productName").innerHTML = toArray[0];
+                        document.getElementById("price").innerHTML = "Ár: "+ toArray[1]+ " Ft";
+                        document.getElementById("description").innerHTML = "Leírás: "+ toArray[2];
+                        document.getElementById("weight").innerHTML = "Súly: "+ toArray[3] + "g";
+                        document.getElementById("brand").innerHTML ="Márka: "+  toArray[4];
+                        document.getElementById("color").innerHTML = "Szín: "+ toArray[5];
+                        document.getElementById("madeIn").innerHTML = "Származási hely: "+ toArray[6];
+                        if(toArray[7] === "0"){
+                            document.getElementById("size").innerHTML = "Méret: Ehhez az árúhoz nem tartozik méret.";
+                        }else{
+                            document.getElementById("size").innerHTML = "Méret: "+ toArray[7];
+                        }
+                        if(toArray[8] === "U"){
+                            document.getElementById("sex").innerHTML = "Nem: Uniform";
+                        }
+                        else if(toArray[8] === "F"){
+                            document.getElementById("sex").innerHTML = "Nem: Fiú";
+                        }
+                        else if(toArray[8] === "L"){
+                            document.getElementById("sex").innerHTML = "Nem: Lány";
+                        }
+                        
+                        if(toArray[9] === 0){
+                            document.getElementById("stock").innerHTML = "Nincs készleten!";
+                        }else{
+                            document.getElementById("stock").innerHTML = "Van készleten!";
+                        }
+                        
+                        document.getElementById("image").src = toArray[10];
+                        
+                        
+                    },
+                    error: function(){
+                        alert("hiba");
+                    }
+                }); 
             }
             
             
@@ -53,22 +97,28 @@
                         <div id="checkoutFields" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             
                             <div class="productImg col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                <img src="img/probacumisuveg.jpg">
+                                <img id="image" src="img/probacumisuveg.jpg">
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                             <div class="productContainer articlesShop col-lg-5 col-md-5 col-sm-5 col-xs-5">
                                 <h1 id="productName">Példacumisüveg</h1>
                                 <div>    
-                                    <p>Ár</p>
-                                    <p>Leírás</p>
-                                    <p>Súly</p>
-                                    <p>Márka</p>
-                                    <p>Szín</p>
-                                    <p>Származási hely</p>
-                                    <p>Méret<p>
-                                    <p>Nem</p>
-                                    <p>Készleten</p>
+                                    <p id="price">Ár</p>
+                                    <p id="description">Leírás</p>
+                                    <p id="weight">Súly</p>
+                                    <p id="brand">Márka</p>
+                                    <p id="color">Szín</p>
+                                    <p id="madeIn">Származási hely</p>
+                                    <p id="size">Méret<p>
+                                    <p id="sex">Nem</p>
+                                    <p id="stock">Készleten</p>
                                 </div>
+                                
+                                <form action="">
+                                    <input type="number" id="quantity" min="1" max="10">
+                                    <input type="submit" class="btn btn-success " value="Hozzáadás">
+                                </form>
+
                                 
                             </div>
                         </div>

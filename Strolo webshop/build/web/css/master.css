@@ -176,6 +176,7 @@ body{
 }
 
 .productImg img{
+    max-width: 400px;
     height: 340px;
     margin: 10px;
     
@@ -183,7 +184,7 @@ body{
 }
 .productContainer{
     margin: 10px;
-    height: 340px;
+    height: 400px;
 }
 .productContainer p{
     text-align: left;

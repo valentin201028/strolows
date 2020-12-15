@@ -75,7 +75,7 @@
                             
                         }
                         
-                        reply_click(5);
+                        reply_click(54);
                         
                         
                     },
@@ -90,15 +90,14 @@
             
             function reply_click(clicked)
             {
-                var choose = 0;
+                var chosen = 0;
                 if (typeof clicked !== 'undefined') {
-                     choose = clicked;
+                     chosen = clicked;
                 }
                 
                 
-                console.log(choose);
-                localStorage.setItem("choose", choose);
-                
+                console.log(chosen);
+                localStorage.setItem("chosen", chosen);
                 
             }; 
                    

@@ -5,7 +5,7 @@
             <url>src/java/Service/ProductService.java</url>
             <bookmark id="1">
                 <name/>
-                <line>105</line>
+                <line>106</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,10 +14,11 @@
         <group>
             <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/src/java/Service/ProductService.java</file>
             <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/web/product.html</file>
-            <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/src/java/Model/Product.java</file>
             <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/web/webshop.html</file>
             <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/web/css/master.css</file>
+            <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/src/java/Controller/ProductController.java</file>
+            <file>file:/C:/Users/Valentin/Desktop/strolo/Strolo%20webshop/web/order.html</file>
         </group>
     </open-files>
 </project-private>

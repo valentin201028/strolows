@@ -15,9 +15,9 @@ import java.util.List;
 public class ProductService {
     
     //EZ A FÜGGVÉNY KÉRI LE, ÉS ADJA VISSZA ANNAK A TERMÉKNEK AZ ADATAIT, MELYNEK ID-JÁT MEGADTUK NEKI (STRING ->PRODUCT)
-    public void ProductFill(Integer id){
+    public List<String> ProductFill(Integer id){
         Connection conn = null;
-        
+        List<String> lista = new ArrayList<>();
         try{
             
             Statement stmt;
@@ -25,38 +25,39 @@ public class ProductService {
             
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/strolo?useSSL=false&allowPublicKeyRetrieval=true","admin","admin");
-            
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            if(conn != null){
+                System.out.println("Connected!");
+                
+                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            rs = stmt.executeQuery("SELECT * from product WHERE product.id=" + id + ";");
+               rs = stmt.executeQuery("SELECT * from Product where id =" + id  );
 
-            Integer CateroryID = rs.getInt("categoryID");
-            String productName = rs.getString("productName");
-            Integer price = rs.getInt("price");
-            String description = rs.getString("description");
-            Integer weight = rs.getInt("weight");
-            String brand = rs.getString("productName");
-            String color = rs.getString("color");
-            String madeIn = rs.getString("madeIn");
-            String gender = rs.getString("gender");
-            Integer cSize = rs.getInt("cSize");
-            Integer stock = rs.getInt("stock");
-            String photo = rs.getString("photo");
-            Integer isActive = rs.getInt("isActive");
+                while(rs.next()){
+                    lista.add(rs.getString("productName"));
+                    lista.add(rs.getString("price"));
+                    lista.add(rs.getString("description"));
+                    lista.add(rs.getString("weight"));
+                    lista.add(rs.getString("brand"));
+                    lista.add(rs.getString("color"));
+                    lista.add(rs.getString("madeIn"));
+                    lista.add(rs.getString("cSize"));
+                    lista.add(rs.getString("gender"));
+                    lista.add(rs.getString("stock"));
+                    lista.add(rs.getString("photo"));
+                }
+                conn.close();
+                
+            }
             
             
             
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println(e.toString());
         }
         
-        
+        return lista;
     }
         
-   
-
-    
-    
     
     //EZ A FÜGGVÉNY OLVASSA KI, HOGY A 'WEBSHOP' LAYOUTON MELY TÍPUS ÉS NEM VAN BEÁLLÍTVA
     //EZ ALAPJÁN KIOLVASSA EZEKET AZ ÉRTÉKEKET AZ ADATBÁZISBÓL, MAJD VISSZAADJA A CONTROLLERNEK

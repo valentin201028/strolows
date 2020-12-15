@@ -56,6 +56,21 @@ public class ProductController extends HttpServlet {
                     
                 }
                 
+                if(request.getParameter("task").equals("cProduct")){
+                    String number0 = request.getParameter("number");
+                    Integer number = Integer.parseInt(number0);
+                    List<String> lista = new ArrayList<>();
+                    lista = Psrv.ProductFill(number);
+                    String lista1 = "";
+                    
+                    for(int i = 0; i < lista.size(); i++ ){
+                        lista1 += lista.get(i) + "|";
+                    }
+                    
+                    out.write(lista1);
+                    out.close();
+                }
+                
             }
            
         }catch(IOException e){
