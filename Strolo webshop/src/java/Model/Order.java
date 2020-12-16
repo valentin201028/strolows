@@ -1,6 +1,7 @@
 
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,7 +17,7 @@ public abstract class Order {
     private static String uPhone;
     private static Integer orderAmount;
     private static Integer isActive;
-    private static List<Integer> productList;        
+    private static List<Integer> productList = new ArrayList<>();        
     
     
     public Order(Integer id, String uFirstName, String uLastName, String uEmail, String uZipCode, String uCity, String uAddress, String uPhone, Integer orderAmount, Integer isActive, List<Integer> productList) {

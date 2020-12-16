@@ -66,6 +66,26 @@
                 }); 
             }
             
+            function addToBasket(){
+                var task = "addToBasket";
+                var quantity = document.getElementById("quantity").value;
+                var productId = localStorage.getItem("chosen");
+                var request = {"task":task,"quantity":quantity,"productId":productId};
+                $.ajax({
+                    url: "BasketController",
+                    type: "POST",
+                    data: request,
+                    success: function(rd){
+                        alert(rd);
+                        
+                    },
+                    error: function(){
+                        alert("hiba");
+                    }
+                }); 
+                    
+            }
+            
             
             
             
@@ -115,8 +135,8 @@
                                 </div>
                                 
                                 <form action="">
-                                    <input type="number" id="quantity" min="1" max="10">
-                                    <input type="submit" class="btn btn-success " value="Hozzáadás">
+                                    <input style="color: black" type="number" id="quantity" min="1" max="10">
+                                    <input type="submit" class="btn btn-success " onclick="addToBasket()" value="Hozzáadás">
                                 </form>
 
                                 

@@ -14,7 +14,7 @@ public class InsertService {
     
     //EZZEL A FÜGGVÉNNYEL ÍRÓDIK BE EGY ÚJ RENDELÉS AZ 'ORDER' TÁBLÁBA.
     //A RENDELÉS GOMBRA HÍVÓDIK MEG
-    public void toOrder(String uFirstName,String uLastName,String uEmail,String uZipCode,String uCity,String uAddress,Integer uPhone,Integer orderAmount,Integer is_active){
+    public void toOrder(String uFirstName,String uLastName,String uEmail,String uZipCode,String uCity,String uAddress,String uPhone,Integer orderAmount,Integer is_active){
         Connection conn = null;
         
         try{
@@ -28,7 +28,7 @@ public class InsertService {
                 
                 stmt = conn.createStatement();
 
-                stmt.execute("INSERT INTO product(uFirstName,uLastName,uEmail,uZipCode,uCtiy,uAddress,uPhone,orderAmount,is_active) VALUES ("+ uFirstName + ","+ uLastName +","+ uEmail + "," + uZipCode + ","+ uCity +","+ uAddress + ","+uPhone + ","+ orderAmount +","+ is_active + ");");
+                boolean execute = stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ("+ uFirstName + ","+ uLastName +","+ uEmail + "," + uZipCode + ","+ uCity +","+ uAddress + ","+uPhone + ","+ orderAmount +","+ is_active + ")");
 
                 stmt.close();
             }

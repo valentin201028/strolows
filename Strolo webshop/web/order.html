@@ -14,6 +14,7 @@
                 var email = document.getElementById("email").value;
                 var fname = document.getElementById("fname").value;
                 var name = document.getElementById("name").value;
+                var zip = document.getElementById("zip").value;
                 var adresse1 = document.getElementById("adresse1").value;
                 var adresse2 = document.getElementById("adresse2").value;
                 var phoneNumber = document.getElementById("phoneNumber").value;
@@ -33,7 +34,7 @@
                     var agreement = "false";
                 }
                 
-                var request = {"task": task,"email":email,"fname":fname,"name":name,"adresse1":adresse1,"adresse2":adresse2,"phoneNumber":phoneNumber,"payCash":payCash,"agreement":agreement};
+                var request = {"task": task,"email":email,"fname":fname,"name":name,"zip":zip,"adresse1":adresse1,"adresse2":adresse2,"phoneNumber":phoneNumber,"payCash":payCash,"agreement":agreement};
                 $.ajax({
                     url: "EmailController",
                     type: "POST",
@@ -55,6 +56,70 @@
                     document.getElementById("otherFild").style.borderColor = "red";
                 }
             }
+            
+            window.onload = function call(){
+                onload: showProduct();
+            };
+            
+            function showProduct(){
+                var task = "showProduct";
+                var request = {"task": task};
+                $.ajax({
+                    url: "BasketController",
+                    type: "POST",
+                    data: request,
+                    success: function(rd){
+                        var getAll = rd;
+                        var toArray = getAll.split("|");
+                        var total = 0;
+                        var q = 0;
+                        var m = 1;
+                        var n = 2;
+                        var p = 3;
+                        
+                        for(var i = 0; i<toArray.length/4-1; i++){
+                            
+                            var qu = toArray[q];
+                            var im = toArray[m];
+                            var na = toArray[n];
+                            var pr = toArray[p];
+                            
+                            var element = document.getElementById("order"+i).className = "tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer";
+                            var img = document.createElement('img'); 
+                            img.src = im;
+                            img.width = "80";
+                            document.getElementById("order"+i).appendChild(img);
+                            var name = document.createElement('P');
+                            name.innerHTML = na;
+                            document.getElementById("order"+i).appendChild(name);
+                            var quantity = document.createElement('P');
+                            quantity.innerHTML = qu + " db";
+                            document.getElementById("order"+i).appendChild(quantity);
+                            var price = document.createElement('P');
+                            price.innerHTML = pr + " Ft";
+                            total += qu*pr;
+                            document.getElementById("order"+i).appendChild(price);
+                            
+                            q = q + 4;
+                            m = m + 4;
+                            n = n + 4;
+                            p = p + 4;
+                            
+                        }
+                        
+                        document.getElementById("total").innerHTML = "Végösszeg:" + total + " Ft";
+                        
+                        
+                    },
+                    error: function(){
+                        alert("hiba");
+                    }
+                });
+                
+            }
+            
+            
+            
            
         </script>
         
@@ -101,6 +166,11 @@
                                 </div>
 
                                 <div class="text-right formContainer">
+                                    <label for="zip">Irányítószám*</label>
+                                    <input id="zip" type="text" name="zip" placeholder="7400">
+                                </div>
+                                
+                                <div class="text-right formContainer">
                                     <label for="adresse1">Város*</label>
                                     <input id="adresse1" type="text" name="adresse1" placeholder="Budapest">
                                 </div>
@@ -133,15 +203,19 @@
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                             <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastFild npdng">
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
+                                    <div id="order0"></div>
+                                    <div id="order1"></div>
+                                    <div id="order2"></div>
+                                    <div id="order3"></div>
+                                    <div id="order4"></div>
+                                    <div id="order5"></div>
+                                    <div id="order6"></div>
+                                    <div id="order7"></div>
+                                    <div id="order8"></div>
+                                    <div id="order9"></div>
                                     
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-center npdng lastFormContainer"><img class="imgLastForm" src="img/black.png" alt="" width="50"> Lorem ipsum dolor.</div>
-                                    <div class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">Total: 01010111 01101000 01111001</div>
+                                    
+                                    <div id="total" class="tcol-lg-12 col-md-12 col-sm-12 col-xs-12 text-left"></div>
                                 </div>
                                 
                                 <div id="submitField" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">

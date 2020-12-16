@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import Model.Order;
 import Service.EmailService;
+import Service.InsertService;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "EmailController", urlPatterns = {"/EmailController"})
 public class EmailController extends HttpServlet {
  EmailService eSrv = new EmailService();
+ InsertService iSrv = new InsertService();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,6 +45,7 @@ public class EmailController extends HttpServlet {
                     String email = request.getParameter("email");
                     String nev1 = request.getParameter("fname");
                     String nev2 = request.getParameter("name");
+                    String zip = request.getParameter("zip");
                     String varos = request.getParameter("adresse1");
                     String cim = request.getParameter("adresse2");
                     String telefon = request.getParameter("phoneNumber");
@@ -55,7 +59,7 @@ public class EmailController extends HttpServlet {
                     
                     String uzenet = "hiba";
                     Integer s = 0;
-                    if(email.length() == 0 || nev1.length() == 0 || nev2.length() == 0 || varos.length() == 0 || cim.length() == 0 || telefon.length() == 0 ){
+                    if(email.length() == 0 || nev1.length() == 0 || nev2.length() == 0 || zip.length()==0 ||varos.length() == 0 || cim.length() == 0 || telefon.length() == 0 ){
                         uzenet="Kérem, töltsön ki minden mezőt";
                         s++;
                     }
@@ -68,7 +72,11 @@ public class EmailController extends HttpServlet {
                         s++;
                     }
                     if(s == 0){
-                        EmailService.DatasToModel(email,nev1,nev2,varos,cim,telefon);
+                        EmailService.DatasToModel(email,nev1,nev2,zip,varos,cim,telefon);
+                        
+                        Integer amo = Order.getProductList().size()/2;
+                     
+                        iSrv.toOrder(nev1, nev2, email, zip, varos, cim, telefon,amo, 1);
                         
                         if(EmailService.Email(email)){
                             uzenet = "Az e-mail sikeresen elküldve.";

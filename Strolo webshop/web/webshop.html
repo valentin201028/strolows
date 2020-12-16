@@ -75,7 +75,7 @@
                             
                         }
                         
-                        reply_click(54);
+                        
                         
                         
                     },
@@ -84,6 +84,11 @@
                     }
                 }); 
             };
+            
+            function openProduct(){
+                var num = document.getElementById("number").value;
+                reply_click(num);
+            }
             
             
             
@@ -152,6 +157,10 @@
                             <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" type="search" id="kereses" onchange="Kereses()" placeholder="Keresés">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         </form>
+                        <form action="product.html">
+                                    <input style="color: black" type="number" id="number">
+                                    <input type="submit" class="btn btn-success "  onclick="openProduct()" value="megnyitás">
+                                </form>
                     </div>
                     <div class="container col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
                 </section>

@@ -26,10 +26,11 @@ import Service.ProductService;
 public class EmailService {
     
     //EZ A FÜGGVÉNY ÍRJA BE A MEGADOTT ADATOKAT A MODELBE.
-    public static void DatasToModel(String email,String nev1,String nev2,String varos,String cim,String telefon){
+    public static void DatasToModel(String email,String nev1,String nev2,String zip,String varos,String cim,String telefon){
         Order.setuEmail(email);
         Order.setuFirstName(nev1);
         Order.setuLastName(nev2);
+        Order.setuZipCode(zip);
         Order.setuCity(varos);
         Order.setuAddress(cim);
         Order.setuPhone(telefon);
@@ -109,7 +110,8 @@ public class EmailService {
                                 + "<div style='padding:40px;padding-top:20px; '>"
                                     + "E-mail-cím: "+ Order.getuEmail() + "<br>"
                                     + "Vezetéknév: "+ Order.getuFirstName() + "<br>"
-                                    + "Kersztnév: "+ Order.getuLastName() + "<br>"
+                                    + "Keresztnév: "+ Order.getuLastName() + "<br>"
+                                    + "Irányítószám: "+ Order.getuZipCode()+ "<br>"
                                     + "Város: "+ Order.getuCity() + "<br>"
                                     + "Cím: "+ Order.getuAddress() + "<br>"
                                     + "Telefonszám: "+ Order.getuPhone() + "<br>"

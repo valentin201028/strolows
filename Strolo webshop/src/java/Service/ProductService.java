@@ -14,6 +14,51 @@ import java.util.List;
 //ITT VANNAK AZOK A FÜGGVÉNYEK, MELYEK FELTÖLTIK A 'WEBSHOP' ÉS A 'PRODUCT' LAYOUTOT
 public class ProductService {
     
+    public List<String> orderProducts(List<Integer> lista){
+        Connection conn = null;
+        
+        List<Integer> listaa = new ArrayList<>();
+        listaa = lista;
+        List<String> productList = new ArrayList<>();
+        try{
+            
+            Statement stmt;
+            ResultSet rs;
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/strolo?useSSL=false&allowPublicKeyRetrieval=true","admin","admin");
+            if(conn != null){
+                System.out.println("Connected!");
+                
+                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+               rs = stmt.executeQuery("SELECT id,photo,ProductName,price from product");
+
+                while(rs.next()){
+                    Integer num = rs.getInt("id");
+                    if(listaa.contains(num)){
+                        productList.add(rs.getString("photo"));
+                        productList.add(rs.getString("productName"));
+                        productList.add(rs.getString("price"));
+                    }
+                    
+                }
+                conn.close();
+                
+            }
+            
+            
+            
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+        return productList;
+    }
+    
+    
+    
+    
     //EZ A FÜGGVÉNY KÉRI LE, ÉS ADJA VISSZA ANNAK A TERMÉKNEK AZ ADATAIT, MELYNEK ID-JÁT MEGADTUK NEKI (STRING ->PRODUCT)
     public List<String> ProductFill(Integer id){
         Connection conn = null;

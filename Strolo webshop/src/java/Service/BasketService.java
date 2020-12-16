@@ -11,14 +11,29 @@ import java.util.Objects;
 public class BasketService {
     
     //HOZZÁADÁS A KOSÁRHOZ
-    public void addToBasket(Integer number, Integer id){
-        //egy for ciklus lefut annyiszor, ahányas számot kap, tehát annyiszor rakja bele 
-        // az id-t az 'Order.productList'-be
-        List <Integer> basket = new ArrayList<>();
-        for(int i = 0 ; i < number; i++){
-             basket.add(id);
+    public void addToBasket(Integer id , Integer quantity){
+        //id és hozzá tartozó darabszám belerakása a kosárba
+        try{
+            List<Integer> basket = new ArrayList<>();
+            basket = Order.getProductList();
+            boolean sameId = false;
+            
+            for(int i = 0; i<basket.size(); i=i+2){
+                if(Objects.equals(id, basket.get(i))){
+                   basket.set(i+1, quantity);
+                   sameId = true;
+                }
+            }
+            if(!sameId){
+                basket.add(id);
+                basket.add(quantity);
+                
+            }
+            Order.setProductList(basket);
         }
-        Order.setProductList(basket);
+        catch(Exception e){
+            e.toString();
+        }
     }
     
     //VISSZAADJA A KOSÁR TELJES TARTALMÁT (PRODUCT-ID-KET)
