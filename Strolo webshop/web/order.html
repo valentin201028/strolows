@@ -10,7 +10,9 @@
         
         <script>
             function dataInput(){
+                
                 var task = "dataInput";
+                var datas = localStorage.getItem("datas");
                 var email = document.getElementById("email").value;
                 var fname = document.getElementById("fname").value;
                 var name = document.getElementById("name").value;
@@ -34,14 +36,17 @@
                     var agreement = "false";
                 }
                 
-                var request = {"task": task,"email":email,"fname":fname,"name":name,"zip":zip,"adresse1":adresse1,"adresse2":adresse2,"phoneNumber":phoneNumber,"payCash":payCash,"agreement":agreement};
+                var request = {"task": task,"datas":datas,"email":email,"fname":fname,"name":name,"zip":zip,"adresse1":adresse1,"adresse2":adresse2,"phoneNumber":phoneNumber,"payCash":payCash,"agreement":agreement};
                 $.ajax({
                     url: "EmailController",
                     type: "POST",
                     data: request,
                     success: function(rd){
                         alert(rd);
-                        
+                        if(rd ==="Az e-mail sikeresen elküldve." )
+                        {
+                            window.open("order2.html","_self");
+                        }                        
                     },
                     error: function(){
                         alert("hiba");
@@ -59,7 +64,10 @@
             
             window.onload = function call(){
                 onload: showProduct();
+                
+                
             };
+            
             
             function showProduct(){
                 var task = "showProduct";
@@ -70,6 +78,7 @@
                     data: request,
                     success: function(rd){
                         var getAll = rd;
+                        localStorage.setItem("datas", getAll);
                         var toArray = getAll.split("|");
                         var total = 0;
                         var q = 0;

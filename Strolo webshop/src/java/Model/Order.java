@@ -17,10 +17,11 @@ public abstract class Order {
     private static String uPhone;
     private static Integer orderAmount;
     private static Integer isActive;
+    private static String datas = null;
     private static List<Integer> productList = new ArrayList<>();        
     
     
-    public Order(Integer id, String uFirstName, String uLastName, String uEmail, String uZipCode, String uCity, String uAddress, String uPhone, Integer orderAmount, Integer isActive, List<Integer> productList) {
+    public Order(Integer id, String uFirstName, String uLastName, String uEmail, String uZipCode, String uCity, String uAddress, String uPhone, Integer orderAmount, Integer isActive,String datas, List<Integer> productList) {
         Order.id = id;
         Order.uFirstName = uFirstName;
         Order.uLastName = uLastName;
@@ -31,7 +32,16 @@ public abstract class Order {
         Order.uPhone = uPhone;
         Order.orderAmount = orderAmount;
         Order.isActive = isActive;
+        Order.datas = datas;
         Order.productList = productList;
+    }
+
+    public static String getDatas() {
+        return datas;
+    }
+
+    public static void setDatas(String datas) {
+        Order.datas = datas;
     }
 
     public static Integer getId() {

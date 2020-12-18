@@ -54,14 +54,12 @@
                             img.src = picture;
                             document.getElementById("product"+i).appendChild(img);
                             var name = document.createElement('BUTTON');
-                            name.innerHTML = prodName;
                             
-                            name.onclick = "window.location.href='product.html'";
+                            name.innerHTML = prodName;
+                            name.setAttribute("onclick","reply_click(this.id)")
                             name.classList.add("name");
                             name.style.color = "white";
                             name.id = prodID; 
-                            name.onclick = reply_click(name.id);
-                            //name.addEventListener("click",reply_click(this.id));
                             document.getElementById("product"+i).appendChild(name);
                             var prc = document.createElement('P');
                             prc.innerHTML = price +" Ft";
@@ -104,6 +102,7 @@
                 console.log(chosen);
                 localStorage.setItem("chosen", chosen);
                 
+                window.open("product.html","_self");
             }; 
                    
             
@@ -157,11 +156,13 @@
                             <input class="col-lg-4 col-md-4 col-sm-4 col-xs-4" type="search" id="kereses" onchange="Kereses()" placeholder="Keresés">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                         </form>
+                        <!--
                         <form action="product.html">
                                     <input style="color: black" type="number" id="number">
                                     <input type="submit" class="btn btn-success "  onclick="openProduct()" value="megnyitás">
                                 </form>
                     </div>
+                        -->
                     <div class="container col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
                 </section>
                 <article></article>

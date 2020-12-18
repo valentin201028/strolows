@@ -100,8 +100,6 @@ public class BasketController extends HttpServlet {
                     }
                     
                     out.write(lista5);
-                    
-                    
                     out.close();
                 }
             

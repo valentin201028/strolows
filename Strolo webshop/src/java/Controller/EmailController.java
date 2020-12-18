@@ -42,6 +42,7 @@ public class EmailController extends HttpServlet {
            
             if(request.getParameter("task")!=null){
                 if(request.getParameter("task").equals("dataInput")){
+                    String datas = request.getParameter("datas");
                     String email = request.getParameter("email");
                     String nev1 = request.getParameter("fname");
                     String nev2 = request.getParameter("name");
@@ -68,24 +69,23 @@ public class EmailController extends HttpServlet {
                         s++;
                     }
                     if(!ok){
-                        uzenet = "Kérem, fogadja ez az ÁSzF-et!";
+                        uzenet = " ";
                         s++;
                     }
                     if(s == 0){
-                        EmailService.DatasToModel(email,nev1,nev2,zip,varos,cim,telefon);
+                        EmailService.DatasToModel(datas,email,nev1,nev2,zip,varos,cim,telefon);
                         
                         Integer amo = Order.getProductList().size()/2;
                      
                         iSrv.toOrder(nev1, nev2, email, zip, varos, cim, telefon,amo, 1);
                         
-                        if(EmailService.Email(email)){
-                            uzenet = "Az e-mail sikeresen elküldve.";
-                        }
-                       
+                        EmailService.Email(email);
+                            
+                        uzenet = "Az e-mail sikeresen elküldve.";
                     }
                     
                     out.write(uzenet);
-                    out.checkError();
+                    
                     out.flush();
                     
                 }

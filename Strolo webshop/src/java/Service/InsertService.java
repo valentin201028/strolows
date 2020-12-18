@@ -4,6 +4,7 @@ package Service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -28,11 +29,12 @@ public class InsertService {
                 
                 stmt = conn.createStatement();
 
-                boolean execute = stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ("+ uFirstName + ","+ uLastName +","+ uEmail + "," + uZipCode + ","+ uCity +","+ uAddress + ","+uPhone + ","+ orderAmount +","+ is_active + ")");
+                //stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ("+ uFirstName + ","+ uLastName +","+ uEmail + "," + uZipCode + ","+ uCity +","+ uAddress + ","+uPhone + ","+ orderAmount +","+ is_active + ");");
+                //stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ('Kovács','Béla','kb@alma.hu','1000','asdfa','alksj','123456543',2,1);");
 
                 stmt.close();
             }
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             System.out.println(e.getMessage());
         }
         
