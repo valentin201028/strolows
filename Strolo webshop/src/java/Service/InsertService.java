@@ -30,7 +30,7 @@ public class InsertService {
                 stmt = conn.createStatement();
 
                 //stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ("+ uFirstName + ","+ uLastName +","+ uEmail + "," + uZipCode + ","+ uCity +","+ uAddress + ","+uPhone + ","+ orderAmount +","+ is_active + ");");
-                //stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,order.is_active) VALUES ('Kovács','Béla','kb@alma.hu','1000','asdfa','alksj','123456543',2,1);");
+                stmt.execute("INSERT INTO order(uFirstName,uLastName,uEmail,uZipCode,uCity,uAddress,uPhone,orderAmount,is_active) VALUE ('Kovács','Béla','kb@alma.hu','1000','asdfa','alksj','123456543','2','1');");
 
                 stmt.close();
             }
