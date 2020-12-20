@@ -116,21 +116,25 @@ public class EmailService {
                         ListaElem = "";
                     }
                 }
+                try{
+                    for(int i = 0; i< lista.size();i=i+4){
+                        Integer db = Integer.parseInt(lista.get(i).trim());
+                        lista.set(i,"darabszám: " + lista.get(i));
+                        lista.set(i+1,"képURL: " + lista.get(i+1) );
+                        lista.set(i+2,"Terméknév: " + lista.get(i+2) );
+                        Integer ar = Integer.parseInt(lista.get(i+3));
+                        vegosszeg+= db*ar;
+                        lista.set(i+3,"Ár: " + lista.get(i+3) );
 
-                System.out.println(lista);
-                for(int i = 0; i< lista.size();i=i+4){
-                    lista.set(i,"darabszám: " + lista.get(i) );
-                    lista.set(i+1,"képURL: " + lista.get(i+1) );
-                    lista.set(i+2,"Terméknév: " + lista.get(i+2) );
-                    vegosszeg += Integer.parseInt(lista.get(i+3));
-                    lista.set(i+3,"Ár: " + lista.get(i+3) );
+                        datas += lista.get(i) + "  |  ";
+                        datas += lista.get(i+1) + "  |  ";
+                        datas += lista.get(i+2) + "  |  ";
+                        datas += lista.get(i+3) + "  |  ";
+                        datas += "\n <br>";
 
-                    datas += lista.get(i) + "  |  ";
-                    datas += lista.get(i+1) + "  |  ";
-                    datas += lista.get(i+2) + "  |  ";
-                    datas += lista.get(i+3) + "  |  ";
-                    datas += "\n <br>";
-
+                    }
+                }catch(Exception e ){
+                    e.toString();
                 }
                 
 
