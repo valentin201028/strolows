@@ -10,7 +10,15 @@
         <script>
             
             window.onload = function call(){
+                onload: catSet();
                 onload: Product();
+                
+            };
+            
+            
+            function catSet(){
+                var catszam = localStorage.getItem("cat");
+                document.getElementById('tipuskereses').value = catszam;
             };
             
             function Product(){

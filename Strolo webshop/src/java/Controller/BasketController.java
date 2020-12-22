@@ -69,7 +69,7 @@ public class BasketController extends HttpServlet {
                     
                     List<Integer> lista2 = new ArrayList<>();
                     for(int i = 0; i < lista.size(); i=i+2){
-                        if(i+1 > 0){
+                        if(lista.get(i+1) > 0){
                             lista2.add(lista.get(i));
                         }
                     }

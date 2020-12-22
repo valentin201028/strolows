@@ -6,6 +6,15 @@
             <title>Strolo</title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
             <link rel="stylesheet" href="css/master.css">
+            
+            <script>
+                
+                function catChoose(catid){
+                    localStorage.setItem("cat", catid);
+                }
+                
+            </script>
+            
 	</head>
 	<body class="container">
         <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 npdng">
@@ -37,14 +46,14 @@
                     <h4>
                         Nálunk kedvére válogathat akár kicsiknek, akár nagyoknak.  
                     </h4>
-                    <h3><button type="button" class="btn btn-success"><a style="color: white"  href="webshop.html">Kategóriák</a></button></h3>
+                    <h3><button type="button" class="btn btn-success"><a style="color: white" id="0" onclick="catChoose(this.id)" href="webshop.html">Kategóriák</a></button></h3>
                     <div style="padding-left:20px; ">
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Ruhanemű</a></button></h4>
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Játék</a></button></h4>
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Ápolás</a></button></h4>
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Táplálkozás</a></button></h4>
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Hordozás</a></button></h4>
-                        <h4><button type="button" class="btn btn-info"><a style="color: white"  href="webshop.html">Otthon</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="1" onclick="catChoose(this.id)" href="webshop.html">Ruhanemű</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="2" onclick="catChoose(this.id)" href="webshop.html">Játék</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="3" onclick="catChoose(this.id)" href="webshop.html">Ápolás</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="4" onclick="catChoose(this.id)" href="webshop.html">Táplálkozás</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="5" onclick="catChoose(this.id)" href="webshop.html">Hordozás</a></button></h4>
+                        <h4><button type="button" class="btn btn-info"><a style="color: white" id="6" onclick="catChoose(this.id)" href="webshop.html">Otthon</a></button></h4>
                     </div>
                 </div>
                 <div class="container col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
